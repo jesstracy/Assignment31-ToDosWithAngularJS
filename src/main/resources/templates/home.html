@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ToDo Web App</title>
+</head>
+<body>
+
+    {{^username}}
+
+    {{#initialChoice}}
+        <div style="text-align: center">
+            <form action="/sign-up-button" method="post">
+                <button type="submit">Sign Up</button>
+            </form>
+
+            - or -
+
+            <form action="/login-button" method="post">
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    {{/initialChoice}}
+
+    {{#loginTrue}}
+        <form action="/login" method="post">
+            <input type="text" placeholder="Name" name="username">
+            <input type="text" placeholder="Password" name="password">
+            <button type="submit">Login</button>
+        </form>
+    {{/loginTrue}}
+
+    {{#signUpTrue}}
+        <form action="/sign-up" method="post">
+            <input type="text" placeholder="Name" name="username">
+            <input type="text" placeholder="Password" name="password">
+            <button type="submit">Sign Up</button>
+        </form>
+    {{/signUpTrue}}
+
+    {{/username}}
+
+
+
+    {{#username}}
+    Welcome, {{username}}!
+    <form action="/add-todo" method="post">
+        <input type="text" placeholder="Enter new todo item" name="todoText">
+        <button type="submit">Add</button>
+    </form>
+
+    <form action="/logout" method="post">
+        <button type="submit">Logout</button>
+    </form>
+
+    <ol>
+        {{#toDoItems}}
+        <li>{{text}} {{isDone}}
+            <a href="/toggle?todoID={{id}}"> <button>toggle</button> </a>
+            <a href="/delete?todoID={{id}}"> <button>delete</button> </a>
+        </li>
+        {{/toDoItems}}
+    </ol>
+
+    {{/username}}
+
+</body>
+</html>
