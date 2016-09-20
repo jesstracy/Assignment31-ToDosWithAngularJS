@@ -52,6 +52,22 @@ angular.module('TIYAngularApp', [])
                         });
         };
 
+        $scope.toggleTodo = function(todoID) {
+            console.log("In toggleTodo() method in js controller!");
+            console.log("About to toggle the todo with id: " + todoID);
+
+            $http.get("toggleToDo.json?todoID=" + todoID)
+                .then(
+                    function successCallback(response) {
+                    console.log(response.data);
+                    console.log("Adding data to scope");
+                    $scope.todos = response.data;
+                    },
+                    function errorCallback(response) {
+                    console.log("Unable to get data");
+                    });
+        };
+
 
         $scope.newToDo = {};
 //        $scope.currentUser = {};

@@ -45,11 +45,12 @@ public class ToDoJSONController {
 
         if (user == null) {
             throw new Exception("Unable to add game without an active user in the session");
-        }
-        todo.user = user;
-        todo.isDone = false;
+        } if (todo.text != null) {
+            todo.user = user;
+            todo.isDone = false;
 
-        todos.save(todo);
+            todos.save(todo);
+        }
 
         return getJsonTodos(session);
     }
@@ -58,6 +59,15 @@ public class ToDoJSONController {
     public ArrayList<ToDo> deleteToDoJson(HttpSession session, int todoID) {
         ToDo todoToDelete = todos.findOne(todoID);
         todos.delete(todoToDelete);
+
+        return getJsonTodos(session);
+    }
+
+    @RequestMapping(path = "/toggleToDo.json", method = RequestMethod.GET)
+    public ArrayList<ToDo> toggleToDoJson(HttpSession session, int todoID) {
+        ToDo todoToToggle = todos.findOne(todoID);
+        todoToToggle.isDone = !todoToToggle.isDone;
+        todos.save(todoToToggle);
 
         return getJsonTodos(session);
     }
