@@ -27,9 +27,9 @@ public class ToDoJSONController {
     public ArrayList<ToDo> getJsonTodos(HttpSession session) {
         user = (User)session.getAttribute("user");
         ArrayList<ToDo> toDoList = new ArrayList<ToDo>();
-        System.out.println("Inside getJsonTodos() method.");
+//        System.out.println("Inside getJsonTodos() method.");
         if (user != null) {
-            System.out.println("User not null bc I'm getting here!");
+//            System.out.println("User not null bc I'm getting here!");
             Iterable<ToDo> allTodos = todos.findAllByUser(user);
             for (ToDo currentTodo : allTodos) {
                 toDoList.add(currentTodo);

@@ -125,10 +125,10 @@ public class ToDoWebAppController {
 
     @RequestMapping(path = "/login", method = RequestMethod.POST)
     public String login(HttpSession session, String username, String password) throws Exception {
-        System.out.println("In login method");
+//        System.out.println("In login method");
         loginTrue = false;
         user = users.findFirstByName(username);
-        System.out.println("Current user info: " + user.name + ", " + user.password + ", " + user.id);
+//        System.out.println("Current user info: " + user.name + ", " + user.password + ", " + user.id);
 
         if (user != null) {
 //            System.out.println("IN LOGIN METHOD: User is not null! " + user.name);
