@@ -1,7 +1,7 @@
 angular.module('TIYAngularApp', [])
    .controller('SampleController', function($scope, $http) {
 //        $scope.name = "James";
-        $scope.todos = {};
+//        $scope.todos = {};
 
         $scope.getTodos = function() {
             console.log("In getTodos function in js controller!");
@@ -36,6 +36,23 @@ angular.module('TIYAngularApp', [])
                     });
         };
 
+        $scope.deleteTodo = function(todoID) {
+            console.log("In deleteTodo method in js controller!");
+            console.log("About to delete the todo with id: " + todoID);
+
+            $http.get("deleteToDo.json?todoID=" + todoID)
+                .then(
+                    function successCallback(response) {
+                        console.log(response.data);
+                        console.log("Adding data to scope");
+                        $scope.todos = response.data;
+                        },
+                    function errorCallback(response) {
+                        console.log("Unable to get data");
+                        });
+        };
+
+
         $scope.newToDo = {};
-        $scope.currentUser = {};
+//        $scope.currentUser = {};
     });

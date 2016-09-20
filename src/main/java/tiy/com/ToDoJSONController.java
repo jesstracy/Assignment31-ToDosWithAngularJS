@@ -54,28 +54,11 @@ public class ToDoJSONController {
         return getJsonTodos(session);
     }
 
-//    @RequestMapping(path = "/login.json", method = RequestMethod.GET)
-//    public User loginJson(HttpSession session, Model model, @RequestBody User currentUser) throws Exception {
-//
-//        session.setAttribute("username", currentUser.name);
-//        model.addAttribute("username", currentUser.name);
-//
-//
-//
-//
-//        user = users.findFirstByName(currentUser.name);
-//
-//        if (user != null) {
-////            System.out.println("IN LOGIN METHOD: User is not null! " + user.name);
-//            if (!currentUser.password.equals(user.password)) {
-//                throw new Exception("Invalid password!");
-//            } else {
-////                System.out.println("IN LOGIN METHOD: Setting username...");
-//                session.setAttribute("username", currentUser.name);
-//                model.
-//            }
-//        }
-//
-//        return currentUser;
-//    }
+    @RequestMapping(path = "/deleteToDo.json", method = RequestMethod.GET)
+    public ArrayList<ToDo> deleteToDoJson(HttpSession session, int todoID) {
+        ToDo todoToDelete = todos.findOne(todoID);
+        todos.delete(todoToDelete);
+
+        return getJsonTodos(session);
+    }
 }
