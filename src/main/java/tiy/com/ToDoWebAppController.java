@@ -71,7 +71,8 @@ public class ToDoWebAppController {
 //            model.addAttribute("username", session.getAttribute("username"));
 //        }
 
-        return "home";
+//        return "home";
+        return "todosAngular";
     }
 
     @RequestMapping(path="/sign-up-button", method = RequestMethod.POST)
