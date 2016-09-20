@@ -56,7 +56,8 @@ public class ToDoWebAppController {
 
             model.addAttribute("toDoItems", listOfTodos);
 
-            model.addAttribute("username", session.getAttribute("username"));
+//            model.addAttribute("username", session.getAttribute("username"));
+            model.addAttribute("user", session.getAttribute("user"));
         }
 
         // Original way - works but shows all todos for all users, not just the user logged in
@@ -71,8 +72,8 @@ public class ToDoWebAppController {
 //            model.addAttribute("username", session.getAttribute("username"));
 //        }
 
-//        return "home";
-        return "todosAngular";
+        return "home";
+//        return "todosAngular";
     }
 
     @RequestMapping(path="/sign-up-button", method = RequestMethod.POST)
@@ -112,7 +113,9 @@ public class ToDoWebAppController {
 //            System.out.println("username and password okay");
             user = new User(username, password);
             users.save(user);
-            session.setAttribute("username", username);
+//            session.setAttribute("username", username);
+//            session.setAttribute("password", password);
+            session.setAttribute("user", user);
         } else {
             throw new Exception("Your username and password must not be blank!");
         }
@@ -125,6 +128,7 @@ public class ToDoWebAppController {
         System.out.println("In login method");
         loginTrue = false;
         user = users.findFirstByName(username);
+        System.out.println("Current user info: " + user.name + ", " + user.password + ", " + user.id);
 
         if (user != null) {
 //            System.out.println("IN LOGIN METHOD: User is not null! " + user.name);
@@ -132,7 +136,10 @@ public class ToDoWebAppController {
                 throw new Exception("Invalid password!");
             } else {
 //                System.out.println("IN LOGIN METHOD: Setting username...");
-                session.setAttribute("username", username);
+//                user = new User(username, password);
+//                session.setAttribute("username", username);
+//                session.setAttribute("password", password);
+                session.setAttribute("user", user);
             }
         }
 

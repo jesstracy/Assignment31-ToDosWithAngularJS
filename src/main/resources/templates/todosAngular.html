@@ -7,19 +7,40 @@
 {{! the default angularjs delimeters - https://mustache.github.io/mustache.5.html for more info  }}
 {{=<% %>=}}
 
+    <!--<input type="text" placeholder="Name" ng-model="currentUser.username"/>-->
+    <!--<input type="text" placeholder="Password" ng-model="currentUser.password"/>-->
+    <!--<input type="button" ng-click="loginJson()" value="Login"/>-->
+
+    {{^username}}
+
+    <form action="/login" method="post">
+        <input type="text" placeholder="Name" ng-model="currentUser.username"/>
+        <input type="text" placeholder="Password" ng-model="currentUser.password"/>
+        <input type="button" ng-click="loginJson()" value="Login"/>
+    </form>
+
+    {{/username}}
+
+
+
     <input type="button" ng-click="getTodos()" value="Refresh Game Data"/>
 
     <div style="position: relative; float: left; width: 40%; padding: 20px;">
         <h2>Todo List</h2>
         <ul>
             <li ng-repeat="todo in todos">
-                {{todo.text}}- {{todo.isDone}}
+                {{todo.text}}- {{todo.done}}
                 <button ng-click="deleteTodo(todo.id)">delete</button>
                 <button ng-click="toggleTodo(todo.id)">toggle</button>
             </li>
         </ul>
     </div>
 
+    <div style="position: relative; float: left; width: 100%; padding: 20px;">
+        <h1>Enter new todo:</h1>
+        <span> <input type="text" ng-model="newToDo.text"/></span>
+        <span> <input type="button" ng-click="addToDoJson()" value="Create new todo"/></span>
+    </div>
 
 </body>
 </html>
